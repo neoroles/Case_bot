@@ -53,6 +53,30 @@ async def cash(call: CallbackQuery, state: FSMContext):
                                 reply_markup=key_cash(0))
 
 
+@dp.callback_query_handler(text='cash', state=Balance.UpConf)
+async def cash(call: CallbackQuery, state: FSMContext):
+    await call.answer()
+    await state.finish()
+    data = await db.select_balance_user(call.message.chat.id)
+    text = f'''💵 <b>Баланс</b> 
+
+💰<b>Ваш баланс:</b> {round(data[0]/10000, 2)} ₽
+
+🔐 <b>Ключи:</b> {data[1]} 🔑
+
+🎟<b>Билеты:</b>
+🔥 Новичок - {data[2]} 🎟
+🌟 Везунчик - {data[3]} 🎟
+🥇 Топовый - {data[4]} 🎟
+🃏 Фартовый - {data[5]} 🎟
+🏆 Лакшери - {data[6]} 🎟
+💎 Олигарх - {data[7]} 🎟'''
+    await bot.edit_message_text(text=text,
+                                chat_id=call.message.chat.id,
+                                message_id=call.message.message_id,
+                                reply_markup=key_cash(0))
+
+
 @dp.callback_query_handler(text='profile:cash')
 async def cash(call: CallbackQuery):
     await call.answer()

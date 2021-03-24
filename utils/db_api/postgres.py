@@ -367,38 +367,58 @@ WHERE user_id={user_id}'''
 
 # СТАТИСТИКА --- Топ по выигрышу за сутки
     async def select_stat_top_win(self):
-        sql = f'''SELECT full_name, username, max_win, par_max_win FROM main WHERE data_up_win>
+        sql = f'''SELECT user_id, full_name, max_win, par_max_win FROM main WHERE data_up_win>
 CURRENT_TIMESTAMP - interval \'1 days\' ORDER BY max_win DESC LIMIT 6'''
         return await self.pool.fetch(sql)
 
 # СТАТИСТИКА --- Топ по балансу
     async def select_stat_top_bal(self):
-        sql = f'''SELECT full_name, username, balance FROM main ORDER BY balance DESC LIMIT 3'''
+        sql = f'''SELECT user_id, full_name, balance FROM main ORDER BY balance DESC LIMIT 3'''
         return await self.pool.fetch(sql)
 
 # СТАТИСТИКА --- Топ по кейсам
     async def select_stat_top_case_all(self):
-        sql = f'''SELECT full_name, username, case_all FROM main ORDER BY case_all DESC LIMIT 3'''
+        sql = f'''SELECT user_id, full_name, case_all FROM main ORDER BY case_all DESC LIMIT 3'''
         return await self.pool.fetch(sql)
 
 # СТАТИСТИКА --- Топ по кейсам
     async def select_stat_top_up_sum(self):
-        sql = f'''SELECT full_name, username, up_sum FROM main ORDER BY up_sum DESC LIMIT 3'''
+        sql = f'''SELECT user_id, full_name, up_sum FROM main ORDER BY up_sum DESC LIMIT 3'''
         return await self.pool.fetch(sql)
 
 # СТАТИСТИКА --- Топ по ключам
     async def select_stat_top_key(self):
-        sql = f'''SELECT full_name, username, key FROM main ORDER BY key DESC LIMIT 3'''
+        sql = f'''SELECT user_id, full_name, key FROM main ORDER BY key DESC LIMIT 3'''
         return await self.pool.fetch(sql)
 
 # СТАТИСТИКА --- Топ по ключам
     async def select_stat_top_friend(self):
-        sql = f'''SELECT full_name, username, col_ref FROM main WHERE status=\'user\' ORDER BY col_ref DESC LIMIT 3'''
+        sql = f'''SELECT user_id, full_name, col_ref FROM main WHERE status=\'user\' ORDER BY col_ref DESC LIMIT 3'''
         return await self.pool.fetch(sql)
 
 # СТАТИСТИКА --- Топ по кол-ву ежедневных бонусов
     async def select_stat_top_get_free(self):
-        sql = f'''SELECT full_name, username, get_free_all FROM main ORDER BY get_free_all DESC LIMIT 3'''
+        sql = f'''SELECT user_id, full_name, get_free_all FROM main ORDER BY get_free_all DESC LIMIT 3'''
+        return await self.pool.fetch(sql)
+
+# СТАТИСТИКА --- Топ по кол-ву побед в лотерею
+    async def select_stat_top_lottery_col_win(self):
+        sql = f'''SELECT user_id, full_name, lottery_col_win FROM main ORDER BY lottery_col_win DESC LIMIT 3'''
+        return await self.pool.fetch(sql)
+
+# СТАТИСТИКА --- Топ по кол-ву выигрыш в лотерею
+    async def select_stat_top_lottery_win(self):
+        sql = f'''SELECT user_id, full_name, lottery_win FROM main ORDER BY lottery_win DESC LIMIT 3'''
+        return await self.pool.fetch(sql)
+
+# СТАТИСТИКА --- Топ по кол-ву побед в нвути
+    async def select_stat_top_lottery_nv_all_game(self):
+        sql = f'''SELECT user_id, full_name, nv_all_game FROM main ORDER BY nv_all_game DESC LIMIT 3'''
+        return await self.pool.fetch(sql)
+
+# СТАТИСТИКА --- Топ по кол-ву выигрыш в нвути
+    async def select_stat_top_lottery_nv_all_win(self):
+        sql = f'''SELECT user_id, full_name, nv_all_win FROM main ORDER BY nv_all_win DESC LIMIT 3'''
         return await self.pool.fetch(sql)
 
     '''баланс и зависимости от баланса

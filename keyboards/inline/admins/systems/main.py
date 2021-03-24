@@ -10,7 +10,8 @@ key_systems = InlineKeyboardMarkup(
             InlineKeyboardButton(text='% win', callback_data='win_percent')
         ],
         [
-            InlineKeyboardButton(text='Реквизиты', callback_data='requisites')
+            InlineKeyboardButton(text='Реквизиты', callback_data='requisites'),
+            InlineKeyboardButton(text='Партнеры', callback_data='partner')
         ],
         [
             InlineKeyboardButton(text='Назад', callback_data='back_start_adm')
