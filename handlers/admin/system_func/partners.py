@@ -6,4 +6,4 @@ from loader import dp, bot, db
 
 @dp.callback_query_handler(text='partner', user_id=admins)
 async def partner(call: CallbackQuery):
-    await call.answer()
+    await call.answer('Недоступно')
